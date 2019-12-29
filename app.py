@@ -2,13 +2,11 @@ from movie import Movie
 from user import User
 
 user = User('John')
-john_wick = Movie('John Wick', 'Action', True)
-new_star_wars = Movie('Star Wars: Rise', 'Action', False)
+john_wick = user.add_movie('John Wick', 'Action')
+new_star_wars = user.add_movie('Star Wars: Rise', 'Action')
 
-user.movies.append(john_wick)
-user.movies.append(new_star_wars)
+user.delete_movie('John Wick')
 
-# print(user)
-# print(user.movies)
+print(user.movies)
 
-print(user.watched_movies())
+# print(user.watched_movies())
