@@ -6,3 +6,10 @@ class Movie:
   
   def __repr__(self):
     return '<Movie {movie_name}: {movie_genre} - {movie_watched}>'.format(movie_name = self.name, movie_genre = self.genre, movie_watched = self.watched)
+  
+  def json(self):
+    return {
+      'name': self.name,
+      'genre': self.genre,
+      'watched': self.watched
+    }

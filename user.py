@@ -22,29 +22,11 @@ class User:
     watched_movies = list(filter(lambda movie: movie.watched, self.movies))
 
     return watched_movies
-
-  def save_to_file(self):
-    with open('{user}.txt'.format(user = self.name), 'w') as f:
-      f.write('{user}\n'.format(user = self.name))
-
-      for movie in self.movies:
-        f.write(
-          '{name}, {genre}, {watched}\n'.format(name = movie.name, genre = movie.genre, watched = str(movie.watched))
-        )
-
-  @classmethod
-  def read_file(cls, filename):
-    # cls stands for class. The method
-    with open(filename, 'r') as f:
-      content = f.readlines()
-      user_name = content[0]
-      movies = []
-
-      for line in content[1:]: # this will start at index 1 ending at the last element
-        movie_data = line.split(', ')
-
-        movies.append(Movie(movie_data[0], movie_data[1], movie_data[2] == True))
-      
-      user = cls(user_name)
-      user.movies = movies
-      return user
+  
+  def json(self):
+    return {
+      'name': self.name,
+      'movies': [
+        movie.json() for movie in self.movies
+      ]
+    }
