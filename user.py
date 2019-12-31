@@ -30,3 +30,14 @@ class User:
         movie.json() for movie in self.movies
       ]
     }
+  
+  @classmethod
+  def from_json(cls, data):
+    user = User(data['name'])
+    movies = []
+
+    [movies.append(Movie.from_json(movie)) for movie in data['movies']]
+
+    user.movies = movies
+    
+    return user
